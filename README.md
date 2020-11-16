@@ -16,7 +16,7 @@ Create a `Passenger` class which has:
 * a number of bags
 
 Create a `Plane` class which has:
-* an enum PlaneType (e.g. *BOEING747*) which stores capacity and total weight
+* an PlaneType (e.g. *BOEING747*), capacity and total weight
 
 Create a `Flight` class which has:
 * an empty list of booked `Passenger`'s
