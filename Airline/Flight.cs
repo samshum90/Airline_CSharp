@@ -32,16 +32,38 @@ public class Flight
 
 	public int BookedCount()
 	{
-		return this.BookedPassengers.Count;
+		return BookedPassengers.Count;
+	}
+
+	public int Capacity()
+    {
+		return Plane.Capacity;
+	}	
+	
+	public int FlightTotalWeight()
+    {
+		return Plane.TotalWeight;
 	}
 
 	public int AvailableSeats()
     {
-		return Plane.Capacity - BookedCount(); 
+		return Capacity() - BookedCount(); 
     }
 
 	public void BookPassenger(Passenger passenger)
     {
-		BookedPassengers.Add(passenger);
+		if(BookedCount() <= AvailableSeats())
+			BookedPassengers.Add(passenger);
     }
+
+	public int PassengerBaggageWeight()
+    {
+		var total = 0;
+		foreach(Passenger passenger in BookedPassengers )
+        {
+			total += passenger.NoOfBags;
+        }
+
+		return total;
+	}
 }
