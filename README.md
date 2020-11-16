@@ -1,8 +1,8 @@
 # Airline_CSharp
 
-Your task is to model a system for the world renowned online travel booking agent __TravelJava__. You should use the tools you have learnt this week _where appropriate and useful_. Remember to **TDD**!
+Your task is to model a system for the world renowned online travel booking agent __TravelC__. You should use the tools you have learnt this week _where appropriate and useful_. Remember to **TDD**!
 
-TravelJava doesn't really exist (sadly) - don't stress about how a "real" example of this would work differently. This is just an exercise to practice some different concepts.
+TravelC doesn't really exist (sadly) - don't stress about how a "real" example of this would work differently. This is just an exercise to practice some different concepts.
 
 **Assumptions**:
 * Each passenger bag weighs the same
