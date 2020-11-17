@@ -44,7 +44,7 @@ public class FlightManager
 
     public void BookPassengerRandomSeat(Passenger passenger)
     {
-        if (Flight.BookedCount() <= Flight.AvailableSeats())
+        if (Flight.AvailableSeats() > 0)
         {
             Random r = new Random();
             int randomSeatNumber = r.Next(0, FlightCapacity());

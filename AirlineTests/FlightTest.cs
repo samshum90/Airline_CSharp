@@ -11,9 +11,13 @@ namespace AirlineTests
         private Plane Cessina;
         private Plane Boeing747;
         private Flight BA213;
+        private Flight BA214;
         private Passenger pass1;
         private Passenger pass2;
         private Passenger pass3;
+        private Passenger pass4;
+        private Passenger pass5;
+        private Passenger pass6;
         private TimeSpan BA213Time;
         private TimeSpan BA213UpdatedTime;
 
@@ -26,9 +30,13 @@ namespace AirlineTests
             pass1 = new Passenger("Alice", 2);
             pass2 = new Passenger("John", 3);
             pass3 = new Passenger("Timmy", 4);
+            pass4 = new Passenger("Stan", 10);
+            pass5 = new Passenger("Jenny", 6);
+            pass6 = new Passenger("Sophia", 4);
             BA213Time = new TimeSpan(19, 00, 00);
             BA213UpdatedTime = new TimeSpan(20, 00, 00);
             BA213 = new Flight( DouglasMD80, "BA213", "LON", "EDI", BA213Time);
+            BA214 = new Flight(Cessina, "BA214", "ABR", "MAN", BA213Time);
         }
 
         [Test]
@@ -159,7 +167,43 @@ namespace AirlineTests
         {
             Assert.IsTrue(BA213.SeatAvailabilityCheck(1));
         }  
+        
+        [Test]
+        public void getBookedPassengersTest()
+        {
+            BA213.BookPassenger(pass1);
 
+            Passenger[] expected = { pass1 };
+            Assert.AreEqual(expected, BA213.BookedPassengers);
+        }         
+        
+        [Test]
+        public void BubbleSortPassengerSeatsTest()
+        {
+            BA214.BookPassengerWithSeat(pass1, 5);
+            BA214.BookPassengerWithSeat(pass2, 4);
+            BA214.BookPassengerWithSeat(pass3, 3);  
+            BA214.BookPassengerWithSeat(pass4, 2);
+            BA214.BookPassengerWithSeat(pass5, 0);
+            BA214.BookPassengerWithSeat(pass6, 1);
+            BA214.BubbleSortSeats();
+            Passenger[] expected = { pass5, pass6, pass4, pass3, pass2, pass1};
+
+            Assert.AreEqual(expected, BA214.BookedPassengers);
+        }       
+        
+        [Test]
+        public void BinarySearchPassengerSeatTest()
+        {
+            BA214.BookPassengerWithSeat(pass1, 5);
+            BA214.BookPassengerWithSeat(pass2, 4);
+            BA214.BookPassengerWithSeat(pass3, 3);  
+            BA214.BookPassengerWithSeat(pass4, 2);
+            BA214.BookPassengerWithSeat(pass5, 0);
+            BA214.BookPassengerWithSeat(pass6, 1);
+
+            Assert.AreEqual(pass3, BA214.BinarySearchSeat(3));
+        }  
 
     }
 }
