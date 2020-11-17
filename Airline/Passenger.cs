@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class Passenger
 {
@@ -7,6 +8,9 @@ public class Passenger
     private int 
         _noOfBags;
 
+    private Flight _bookedFlight;
+
+    private int _seat;
     public Passenger(string name, int noOfBags)
     {
         Name = name;
@@ -15,6 +19,8 @@ public class Passenger
 
     public int NoOfBags { get => _noOfBags; set => _noOfBags = value; }
     public string Name { get => _name; set => _name = value; }
+    public Flight BookedFlight { get => _bookedFlight; set => _bookedFlight = value; }
+    public int Seat { get => _seat; set => _seat = value; }
 
     public void AddBags(int number)
     {
@@ -25,4 +31,11 @@ public class Passenger
     {
         Name = newName;
     }
+    
+    public void BookFlight(Flight flight, int seat )
+    {
+        BookedFlight = flight;
+        Seat = seat;
+    }
+
 }

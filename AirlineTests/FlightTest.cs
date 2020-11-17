@@ -1,5 +1,6 @@
 ﻿using Airline;
 using NUnit.Framework;
+using System;
 
 namespace AirlineTests
 {
@@ -13,6 +14,8 @@ namespace AirlineTests
         private Passenger pass1;
         private Passenger pass2;
         private Passenger pass3;
+        private TimeSpan BA213Time;
+        private TimeSpan BA213UpdatedTime;
 
         [SetUp]
         public void Setup()
@@ -23,7 +26,9 @@ namespace AirlineTests
             pass1 = new Passenger("Alice", 2);
             pass2 = new Passenger("John", 3);
             pass3 = new Passenger("Timmy", 4);
-            BA213 = new Flight( DouglasMD80, "BA213", "LON", "EDI", "18:00");
+            BA213Time = new TimeSpan(19, 00, 00);
+            BA213UpdatedTime = new TimeSpan(20, 00, 00);
+            BA213 = new Flight( DouglasMD80, "BA213", "LON", "EDI", BA213Time);
         }
 
         [Test]
@@ -63,8 +68,8 @@ namespace AirlineTests
         [Test]
         public void getAndSetTimeTest()
         {
-            BA213.DepartureTime = "19:00";
-            Assert.AreEqual("19:00", BA213.DepartureTime);
+            BA213.DepartureTime = BA213UpdatedTime;
+            Assert.AreEqual(BA213UpdatedTime, BA213.DepartureTime);
         }
 
         [Test]
@@ -129,6 +134,32 @@ namespace AirlineTests
             BA213.BookPassenger(pass1);
             BA213.BookPassenger(pass2);
             Assert.AreEqual(5, BA213.PassengerBaggageWeight());
-        }
+        }     
+        
+        [Test]
+        public void BookPassengerWithSeatTest()
+        {
+            BA213.BookPassengerWithSeat(pass1, 1);
+            BA213.BookPassengerWithSeat(pass2, 0);
+            BA213.BookPassengerWithSeat(pass3, 2);
+            Assert.AreEqual(2, BA213.BookedCount());
+            Assert.AreEqual(1, pass1.Seat);
+            Assert.AreEqual(0, pass2.Seat);
+        }     
+        
+        [Test]
+        public void FalseBookPassengerWithSeatandAvailablityCheckTest()
+        {
+            BA213.BookPassengerWithSeat(pass1, 1);
+            Assert.IsFalse(BA213.SeatAvailabilityCheck(1));
+        }   
+        
+        [Test]
+        public void TrueBookPassengerWithSeatandAvailablityCheckTest()
+        {
+            Assert.IsTrue(BA213.SeatAvailabilityCheck(1));
+        }  
+
+
     }
 }
